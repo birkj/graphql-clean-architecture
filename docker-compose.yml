@@ -1,6 +1,19 @@
 version: '3.4'
 
 services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "changeme"
+      POSTGRES_DB: "tester"
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+      - "5433:5433"
   grapghql:
     container_name: grapghql
     image: gayankanishka/graphql-clean-architecture
@@ -11,3 +24,5 @@ services:
       - '5000:5000'
       - '5001:5001'
     restart: on-failure
+volumes:
+  postgres:
